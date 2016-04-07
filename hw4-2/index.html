@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Homework 4-2</title>
+<style>
+	body {
+		font-family: Microsoft YaHei;
+	}
+	th {
+		text-align: center;
+		background-color: darkblue;
+		color: white;
+	}
+	td {
+		text-align: right;
+	}
+	table, th, td {
+		border: solid 2px;
+		border-collapse: collapse;
+		border-color: black;
+	}
+	.sky {
+		background-color: skyblue;
+	}
+</style>
+</head>
+<body>
+<table>
+<caption>Earnings for Salepeople</caption>
+<tr><th>Product</th><th>Unit Price</th>
+	<th>Qunatity</th><th>Subtotal</th></tr>
+<script>
+	var i, num = [], price = [49, 99, 199, 299], total;
+	for (i = 0; i < 4; i++) {
+		num[i] = prompt("Please input the quanity " +
+			"of product no." + (i + 1));
+		num[i] = parseInt(num[i]);
+		if (isNaN(num[i])) num[i] = 0;
+	}
+	console.log(num);
+	total = 0;
+	for (i = 0; i < 4; i++) {
+		if (i % 2) document.write('<tr class = "sky">');
+		else document.write('<tr>');
+		document.write("<td>" + (i + 1) + "</td>" +  
+			"<td>" + price[i].toFixed(1) + "</td>" + 
+			"<td>" + num[i] + "</td>" + 
+			"<td>" + (price[i] * num[i]).toFixed(1) + "</td></tr>");
+		total += price[i] * num[i];
+	}
+	document.write("<tr><th colspan = 3>Total</th>" + 
+		"<td>" + total.toFixed(1) + "</td></tr>");
+	document.write("<tr><th colspan = 3>Earnings</th>" + 
+		"<td class = 'sky'>" + (total * 0.09 + 200).toFixed(1) + "</td></tr>");
+	document.write("</table>");
+</script>
+</body>
+</html>
