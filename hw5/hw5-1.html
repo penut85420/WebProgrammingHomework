@@ -1,0 +1,73 @@
+<html>
+<head>
+<style>
+.bb {
+	width: 60px;
+	height: 60px;
+}
+</style>
+</head>
+<body>
+<form>
+	Width(<=10):
+	<input type = "text" id = "number">
+	<input type = "button" value = "Draw Baseball Triangle"
+		onclick = "triangle()">
+	<input type = "button" value = "Draw Baseball Square"
+		onclick = "square()">
+</form>
+<hr>
+<div class = "bb" id = "out"></div>
+<script>
+window.onload = init;
+function init() {
+	for (var i = 0; i < 10; i++) {
+		for (var j = 0; j < 10; j++) {
+			var b = document.createElement("img");
+			b.setAttribute("id", "ball" + i * 10 + j);
+			b.setAttribute("src", "blank.png");
+			b.width = b.height = 50;
+			document.body.appendChild(b);
+		}
+		document.body.appendChild(document.createElement("br"));
+	}
+	console.log("init");
+}
+function square() {
+	var num = reset();
+	for (var j = 0; j < num; j++)
+	for (var i = 0; i < num; i++)
+		setBall(j, i);
+}
+
+function triangle() {
+	var num = reset();
+	for (var j = 0; j < num; j++)
+	for (var i = 0; i <= j; i++)
+		setBall(j, i);
+}
+
+function reset() {
+	var num = document.getElementById("number").value;
+	num = isValid(num);
+	for (var i = 0; i < 10; i++)
+	for (var j = 0; j < 10; j++) {
+		var b = document.getElementById("ball" + j * 10 + i);
+		b.setAttribute("src", "blank.png");
+	}
+	return num;
+}
+function setBall(j, i) {
+	var b = document.getElementById("ball" + j * 10 + i);
+	b.setAttribute("src", "baseball.jpg");
+}
+function isValid(num) {
+	if (num > 10 || num < 0) {
+		window.alert("Input invalid");
+		return 5;
+	} 
+	return num;
+}
+</script>
+</body>
+</html>
