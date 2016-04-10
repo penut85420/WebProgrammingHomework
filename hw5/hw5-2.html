@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<!-- Fig. 9.5: RollDice.html -->
+<!-- Random dice image generation using Math.random. -->
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Random Dice Images</title> 
+<style type = "text/css">
+li { display: inline; margin-right: 10px; }
+ul { margin: 0; }
+.pinkiepie { color: royalblue; }
+</style>
+<script>
+// variables used to interact with the img elements
+var die1Image;
+var die2Image;
+var die3Image;
+var die4Image;
+var die = [];
+// register button listener and get the img elements
+function start() {
+	var button = document.getElementById( "rollButton" ),
+		cheat = document.getElementById( "cheat" );
+	button.addEventListener( "click", rollDice, false );
+	cheat.addEventListener( "click", Cheat, false );
+	die1Image = document.getElementById( "die1" );
+	die2Image = document.getElementById( "die2" );
+	die3Image = document.getElementById( "die3" );
+	die4Image = document.getElementById( "die4" );
+} // end function start
+
+// roll the dice
+function rollDice() {
+	setImage( die1Image );
+	setImage( die2Image );
+	setImage( die3Image );
+	setImage( die4Image );
+	check();
+} // end function rollDice
+
+function Cheat() {
+	var dieValue = Math.floor( 1 + Math.random() * 6 );
+	for (var i = 0; i < 4; i++) {
+		dieImg = document.getElementById( "die" + (i + 1) );
+		dieImg.setAttribute( "src", "die" + dieValue + ".png" );
+		dieImg.setAttribute( "alt", 
+		"die image with " + dieValue + " spot(s)" );
+		die[i] = dieValue;
+	}
+	check();
+}
+
+// set src and alt attributes for a die
+function setImage( dieImg ) {
+	var dieValue = Math.floor( 1 + Math.random() * 6 );
+	dieImg.setAttribute( "src", "die" + dieValue + ".png" );
+	dieImg.setAttribute( "alt", 
+	"die image with " + dieValue + " spot(s)" );
+	die[parseInt(dieImg.id[3])] = dieValue;
+} // end function setImage
+
+function check() {
+	var txt = document.getElementById("txt"),
+		result = document.getElementById("result"),
+		i, j;
+		
+	result.setAttribute("src", "blank.png");
+	for (i = 1; i < 4; i++)
+		if (die[i] != die[i - 1]) break;
+		
+	if (i == 4) {
+		result.setAttribute("src", "congrats.jpg");
+		txt.innerHTML = 'Congratulations! Your roll is "一色"!';
+	} else {
+		var flag = false;
+		for (i = 0; i < 4; i++) {
+			for (j = 0; j < 4; j++) {
+				if (i == j) continue;
+				if (die[i] == die[j]) {
+					flag = true;
+					break;
+				}
+			}
+			if (flag) break;
+		}
+		if (flag) txt.innerHTML = 'No decision, please re-roll the dice!';
+		else {
+			result.setAttribute("src", "oops.jpg");
+			txt.innerHTML = 'Oops! Your roll is "無面"!';
+		}
+	}
+}
+window.addEventListener( "load", start, false );
+</script>
+</head>
+<body>
+<form action = "#">
+	<input id = "rollButton" type = "button" value = "Roll Dice">
+	<input id = "cheat" type = "button" value = "Cheat!!"> 
+</form>
+<ol>
+	<li><img id = "die1" src = "blank.png" alt = "blank image"></li>
+	<li><img id = "die2" src = "blank.png" alt = "blank image"></li>
+	<li><img id = "die3" src = "blank.png" alt = "blank image"></li>
+	<li><img id = "die4" src = "blank.png" alt = "blank image"></li>
+</ol>
+<div id = "txt" class = "pinkiepie"></div>
+<img id = "result" src = "blank.png" alt = "blank image">
+</body>
+</html>
+
+<!--
+**************************************************************************
+* (C) Copyright 1992-2012 by Deitel & Associates, Inc. and               *
+* Pearson Education, Inc. All Rights Reserved.                           *
+*                                                                        *
+* DISCLAIMER: The authors and publisher of this book have used their     *
+* best efforts in preparing the book. These efforts include the          *
+* development, research, and testing of the theories and programs        *
+* to determine their effectiveness. The authors and publisher make       *
+* no warranty of any kind, expressed or implied, with regard to these    *
+* programs or to the documentation contained in these books. The authors *
+* and publisher shall not be liable in any event for incidental or       *
+* consequential damages in connection with, or arising out of, the       *
+* furnishing, performance, or use of these programs.                     *
+**************************************************************************
+-->
