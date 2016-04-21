@@ -1,0 +1,44 @@
+<html>
+<head>
+<link href = "style.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+<p><p>Enter sales amount:</p>
+<input id = "sales" type = "text"> <input type = "button" value = "Submit" onclick = "Pinkie()">
+Salary: <span id = "result"></span></p>
+Number of people who earned salaries in the following ranges:
+<div id = "table">
+</div>
+<script>
+var table = [];
+window.onload = init;
+function Pinkie() {
+	var sales = document.getElementById("sales").value;
+	var result = document.getElementById("result");
+
+	if(isNaN(sales)) sales = 0;
+	result.innerHTML = (sales * 0.09 + 200).toFixed(2);
+	console.log(sales);
+	var index = parseInt(Math.floor(sales * 0.09 / 100));
+	if (index > 8) index = 8;
+	table[index]++;
+	console.log(table);
+	result = document.getElementById("table");
+	var ss;
+	ss = "<table><tbody>";
+	for (var i = 0; i < 8; i++) {
+		ss += "<tr><th>(" + String.fromCharCode(i + 97) + ") $" + (i + 2) + "00-$" + (i + 2) + "99</th>";
+		ss += "<td>" + table[i] + "</td></tr>";
+	}
+	ss += "<tr><th>(i) $1000 and over</th>";
+	ss += "<td>" + table[8] + "</td></tr>";
+	ss += "</tbody></table>";
+	result.innerHTML = ss;
+}
+function init() {
+	for (var i = 0; i < 9; i++)
+		table[i] = 0;
+}
+</script>
+</body>
+</html>
