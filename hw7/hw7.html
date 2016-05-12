@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	var article = ["The A One Some Any".split(" "),
+		"boy girl dog cat car".split(" "),
+		"drove jumped ran walked skipped".split(" "),
+		"to from over under on".split(" ")];
+	function generate() {
+		var num = document.getElementById('num').value;
+		var s = "Once upon a time...<br><br>";
+		if (num < 1) num = 10;
+		for (var i = 0; i < num; i++) {
+			for (var j in article) {
+				var r = rnd(5);
+				s += article[j][r] + " ";
+			}
+			s += "<br><br>";
+		}
+		s += "THE END";
+		document.getElementById('story').innerHTML = s;
+	}
+	function rnd(n) {
+		return Math.floor(Math.random() * n);
+	}
+</script>
+<style>
+	.story {
+		height: 400px;
+		width: 30%;
+		background-color: #FFFFCC;
+		overflow: scroll;
+		font-size: 16px;
+		font-family: Calibri;
+	}
+</style>
+</head>
+<body>
+<div id = "story" class = "story"></div>
+# of sentences: <input type = "text" id = "num" value = "10">
+<input type = "button" onclick = "generate()" value = "Generate Short Story">
+</body>
+</html>
