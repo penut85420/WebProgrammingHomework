@@ -1,0 +1,63 @@
+<html>
+<head>
+<script>
+function Add() {
+	var key = document.getElementById('txtKey').value,
+		value = document.getElementById('txtValue').value;
+	if (key == "") {
+		window.alert("請輸入Key值");
+		return;
+	}
+	localStorage.setItem(key, value);
+	Update();
+}
+function Remove() {
+	for (var i in localStorage)
+		localStorage.removeItem(i);
+	Update();
+}
+function Update() {
+	var s = "<table><tr><th>Key</th><th>Value</th></tr>";
+	for (var i in localStorage)
+		s += "<tr><td>" + i + "</td><td>" + localStorage.getItem(i) + "</td></tr>"; 
+	s += "</table>";
+	document.getElementById('mTable').innerHTML = s;
+}
+</script>
+<style>
+table {
+	width: 300px;
+	border-collapse: collapse;
+	background-color: lightblue;
+	font-family: Microsoft YaHei, 標楷體
+}
+table,td,th {
+	border: 1px solid black;
+	padding: 4px;
+}
+th {
+	text-align: center;
+	color: white;
+	background-color: darkblue;
+}
+tr.oddrow {
+	background-color: white;
+}
+td {
+	text-align: right;
+}
+</style>
+</head>
+<body>
+<div>Key: <input type = "text" id = "txtKey"> Value: <input type = "text" id = "txtValue"></div>
+<input type = "button" value = "Add New Item" onclick = "Add()"> 
+<input type = "button" value = "Remove All Items" onclick = "Remove()">
+<hr>
+<div id = "mTable">
+	<table>
+		<tr><th>Key</th><th>Value</th></tr>
+	</table>
+</div>
+<script>Update();</script>
+</body>
+</html>

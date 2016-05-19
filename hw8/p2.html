@@ -1,0 +1,35 @@
+<html>
+<head>
+<style>
+	body {
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<img id = "Item" src = "blank.png"> <br>
+	<input type = "button" value = "抽道具" onclick = "SEplay()" style = "width: 200px">
+	<div id = "result">請按下Button抽出道具</div>
+	<audio id = "Sound">
+		<source src = "doraemon.mp3">
+	</audio>
+	
+	<script>
+	var item = ["任意門", "時光機", "竹蜻蜓", "時光布", "記憶麵包", "縮小燈",
+		"翻譯蒟蒻", "如果電話亭", "穿透環", "更衣照相機"];
+	var SE = document.getElementById('Sound');
+	var IMG = document.getElementById('Item');
+	var RESULT = document.getElementById('result');
+	function SEplay() {
+		IMG.setAttribute("src", "blank.png");
+		RESULT.innerHTML = "";
+		SE.play();
+	}
+	SE.onended = function() {
+		var r = Math.floor(Math.random() * 10) + 1;
+		IMG.setAttribute("src", r >= 10? "": "0" + r + ".png");
+		RESULT.innerHTML = "你抽到" + item[r - 1] + "！";
+	}
+	</script>
+</body>
+</html>
