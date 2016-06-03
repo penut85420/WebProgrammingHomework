@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Hw 9-2</title>
+        <link rel = "stylesheet" type = "text/css" href = "style.css">
+        <script src = "note.js"></script>
+    </head>
+    <body>
+        <img src="blackboard.jpg" height="624" width="894" style="float:left; z-index:0;" />	
+        <img height="150" width="120" class="note" style="top: 50px; left: 50px; z-index:1;" src="postIt.png" />	
+        <p class="notetext" style="top: 60px; left: 50px; z-index:2;">Note範例<br/>(不會被清除)</p>
+        <div id = "nav" class = "nav">
+            <form action = "#">
+                <p>
+                    <label>便利貼X座標: 
+                    <input type = "number" id = "x" min = "40" max = "740" step = "1" value = "40" />
+                    </label><br/>
+                    <label>便利貼Y座標: 
+                    <input type = "number" id = "y" min = "40" max = "440" step = "1" value = "40" />
+                    </label>
+                </p>
+                <p>
+                    <label>便利貼內容:<br>
+                    <input type = "text" id = "notetext" size="30" maxlength="50" placeholder="請輸入文字" > 		
+                    </label>
+                </p>
+                <p>
+                    <input type = "button" value = "新增便利貼" id = "addButton" onclick = "addNote()">
+                    <input type = "button" value = "移除所有便利貼" id = "removeAllButton" onclick = "clearNote()">
+                </p>
+            </form>
+        </div>
+        <script>
+            loadLocal();
+        </script>
+    </body>
+</html>

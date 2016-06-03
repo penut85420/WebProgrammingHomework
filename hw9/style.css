@@ -1,0 +1,16 @@
+div.nav        {	border: 1px solid skyBlue;
+			margin-left: 3px;
+			padding: 3px;
+			float: left; }
+
+input, p	    {	font-family: 微軟正黑體, 標楷體; }
+
+p.notetext {	position: absolute; 
+			top: 0px; 
+			left: 0px; 
+			margin-left: 5px;
+			width: 100px; }
+			
+img.note    {	position: absolute; 
+			top: 0px; 
+			left: 0px; }	

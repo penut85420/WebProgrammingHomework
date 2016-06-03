@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>15-Puzzle</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        span {
+            font-size: 4em;
+            font-weight: bold;
+            font-family: helvetica, arial, sans-serif;
+            color: blue
+        }
+        
+        table {
+            border-collapse: collapse
+        }
+        
+        td {
+            border: 2px solid gray;
+            width: 5em
+        }
+    </style>
+    <script type="text/javascript">
+        var cells;
+        var swapped;
+        var pcol, prow;
+        function setup() {
+            // create a 2d array of all the cells
+            cells = new Array(
+                    [document.getElementById("cell00"),
+                    document.getElementById("cell01"),
+                    document.getElementById("cell02"),
+                    document.getElementById("cell03")
+                ], [document.getElementById("cell10"),
+                    document.getElementById("cell11"),
+                    document.getElementById("cell12"),
+                    document.getElementById("cell13")
+                ], [document.getElementById("cell20"),
+                    document.getElementById("cell21"),
+                    document.getElementById("cell22"),
+                    document.getElementById("cell23")
+                ], [document.getElementById("cell30"),
+                    document.getElementById("cell31"),
+                    document.getElementById("cell32"),
+                    document.getElementById("cell33")
+                ]);
+
+            placeNumbers();
+        }
+
+        function placeNumbers() {
+            var arr = [];
+            for (var i = 0; i < 16; i++)
+                arr[i] = i + 1;
+            arr[15] = "";   
+                
+            for (var i = 0; i < 16; i++) {
+                var r = rnd(16);
+                var t = arr[r];
+                arr[r] = arr[i];
+                arr[i] = t;
+            }
+            
+            for (var i in cells)
+                for (var j in cells) {
+                    var t = parseInt(i) * 4 + parseInt(j);
+                    cells[i][j].innerHTML = arr[t];
+                    if (arr[t] == "") {
+                        prow = parseInt(i); pcol = parseInt(j);
+                    }
+                }
+        }
+        
+        function rnd(n) {
+            return Math.floor(Math.random() * n);
+        }
+
+        function doClick(row, col) 
+        {
+            console.log(row, col, prow, pcol);
+            var trow = prow - row;
+            var tcol = pcol - col;
+            if (tcol * tcol + trow * trow == 1) {
+                cells[prow][pcol].innerHTML = cells[row][col].innerHTML; 
+                cells[row][col].innerHTML = "";
+                prow = row;
+                pcol = col; 
+                console.log(true);
+            } 
+            checkWin();
+        }
+
+        function checkWin() 
+        {
+            var chk = [];
+            for (var i in cells)
+                for (var j in cells[i])
+                    chk.push(parseInt(cells[i][j].innerHTML));
+            for (var i = 0; i < 15; i++)
+                if (chk[i] != i + 1) return false;
+            window.alert("You win!");
+            return true;
+        }
+
+        function restart() 
+        {
+            placeNumbers();
+        }
+
+        function gotoLast2Steps() 
+        {
+            var arr = [];
+            for (var i = 0; i < 16; i++)
+                arr[i] = i + 1;
+            arr[13] = "";
+            arr[14] = 14;
+            arr[15] = 15;
+            for (var i in cells)
+                for (var j in cells) {
+                    var t = parseInt(i) * 4 + parseInt(j);
+                    cells[i][j].innerHTML = arr[t];
+                    if (arr[t] == "") {
+                        prow = parseInt(i); pcol = parseInt(j);
+                    }
+                }
+        }
+    </script>
+</head>
+
+<body onload="setup()">
+    <table>
+        <tr>
+            <td onclick="doClick( 0, 0 )"><span id="cell00">0</span></td>
+            <td onclick="doClick( 0, 1 )"><span id="cell01">0</span></td>
+            <td onclick="doClick( 0, 2 )"><span id="cell02">0</span></td>
+            <td onclick="doClick( 0, 3 )"><span id="cell03">0</span></td>
+        </tr>
+        <tr>
+            <td onclick="doClick( 1, 0 )"><span id="cell10">0</span></td>
+            <td onclick="doClick( 1, 1 )"><span id="cell11">0</span></td>
+            <td onclick="doClick( 1, 2 )"><span id="cell12">0</span></td>
+            <td onclick="doClick( 1, 3 )"><span id="cell13">0</span></td>
+        </tr>
+        <tr>
+            <td onclick="doClick( 2, 0 )"><span id="cell20">0</span></td>
+            <td onclick="doClick( 2, 1 )"><span id="cell21">0</span></td>
+            <td onclick="doClick( 2, 2 )"><span id="cell22">0</span></td>
+            <td onclick="doClick( 2, 3 )"><span id="cell23">0</span></td>
+        </tr>
+        <tr>
+            <td onclick="doClick( 3, 0 )"><span id="cell30">0</span></td>
+            <td onclick="doClick( 3, 1 )"><span id="cell31">0</span></td>
+            <td onclick="doClick( 3, 2 )"><span id="cell32">0</span></td>
+            <td onclick="doClick( 3, 3 )"><span id="cell33">0</span></td>
+        </tr>
+        <td align="center" colspan="2"><input type="button" value="Restart game" onclick="restart()" id="restart" /></td>
+        <td align="center" colspan="2"><input type="button" value="Go to last 2 steps" onclick="gotoLast2Steps()" id="laststep" /></td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<img id = "MLP"></img>
+		<script>
+			window.onload = Pinkie;
+			function Pinkie() {
+				setInterval(Pie, 1000);
+			}
+			function Pie() {
+				var Fluttershy = ["microsoft", "google", "yahoo", "facebook", "ibm", "apple"];
+				var r = Math.floor(Math.random() * Fluttershy.length);
+				document.getElementById('MLP').setAttribute("src", Fluttershy[r] + ".png");
+			}
+		</script>
+	</body>
+</html>
