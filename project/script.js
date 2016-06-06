@@ -1,3 +1,5 @@
+var file_input = [];
+var file_output = [];
 function coding() {
 	var i, s = document.getElementById("code").value;
 	for (i = 0; i < 100; i++) {
